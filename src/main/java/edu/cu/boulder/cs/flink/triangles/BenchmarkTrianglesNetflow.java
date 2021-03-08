@@ -253,7 +253,8 @@ public class BenchmarkTrianglesNetflow {
 
     // Transforms the netflows into a stream of triads
     DataStream<Triad> triads = netflows
-        .keyBy(new DestKeySelector())
+//        .keyBy(new DestKeySelector())
+        .keyBy(new SourceKeySelector())
         .intervalJoin(netflows.keyBy(new SourceKeySelector()))
         .between(Time.milliseconds(0), Time.milliseconds((long) queryWindow * 1000))
         .process(new EdgeJoiner(queryWindow));
