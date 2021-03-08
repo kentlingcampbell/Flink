@@ -1,7 +1,8 @@
 package edu.cu.boulder.cs.flink.triangles;
 
 import org.apache.flink.api.common.functions.RuntimeContext;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+//import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
 
 import java.time.Instant;
@@ -10,7 +11,9 @@ import java.util.Random;
 /**
  * This creates netflows from a pool of IPs.
  */
-public class NetflowSource extends RichParallelSourceFunction<Netflow> {
+//Below is my edit
+//public class NetflowSource extends RichParallelSourceFunction<Netflow> {
+public class NetflowSource extends SourceFunction<Netflow> {
 
   /// The number of netflows to create.
   private int numEvents;
@@ -123,16 +126,22 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
       String destIp = "node" + dest;
       //String sourceIp = "node0";
       //String destIp = "node1";
+/**
       Netflow netflow = new Netflow(currentEvent, label, time,
                                      parseDate, dateTimeString, protocol, protocolCode,
                                      sourceIp, destIp, sourcePort, destPort, moreFragments, countFragments,
                                      durationSeconds, srcPayloadBytes, destPayloadBytes, srcTotalBytes,
                                      destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
                                       recordForceOut);
+*/
+//Below is my edit
+      Netflow netflow = new Netflow(curretime, parseDate, dateTimeString, sourceIp, destIp);
+
+
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));
-      currentEvent++;
-      time += increment;
+//      currentEvent++;
+//      time += increment;
     }
   }
 
