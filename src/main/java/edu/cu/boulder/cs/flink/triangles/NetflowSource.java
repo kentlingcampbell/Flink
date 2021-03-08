@@ -11,9 +11,7 @@ import java.util.Random;
 /**
  * This creates netflows from a pool of IPs.
  */
-//Below is my edit
-//public class NetflowSource extends RichParallelSourceFunction<Netflow> {
-public class NetflowSource extends SourceFunction<Netflow> {
+public class NetflowSource extends RichParallelSourceFunction<Netflow> {
 
   /// The number of netflows to create.
   private int numEvents;
@@ -126,22 +124,17 @@ public class NetflowSource extends SourceFunction<Netflow> {
       String destIp = "node" + dest;
       //String sourceIp = "node0";
       //String destIp = "node1";
-/**
       Netflow netflow = new Netflow(currentEvent, label, time,
                                      parseDate, dateTimeString, protocol, protocolCode,
                                      sourceIp, destIp, sourcePort, destPort, moreFragments, countFragments,
                                      durationSeconds, srcPayloadBytes, destPayloadBytes, srcTotalBytes,
                                      destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
-                                      recordForceOut);
-*/
-//Below is my edit
-      Netflow netflow = new Netflow(curretime, parseDate, dateTimeString, sourceIp, destIp);
-
+                                     recordForceOut);
 
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));
-//      currentEvent++;
-//      time += increment;
+      currentEvent++;
+      time += increment;
     }
   }
 
