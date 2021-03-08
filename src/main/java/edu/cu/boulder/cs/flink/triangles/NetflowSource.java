@@ -1,8 +1,7 @@
 package edu.cu.boulder.cs.flink.triangles;
 
 import org.apache.flink.api.common.functions.RuntimeContext;
-//import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
-import org.apache.flink.streaming.api.functions.source.SourceFunction;
+import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
 
 import java.time.Instant;
@@ -129,8 +128,7 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
                                      sourceIp, destIp, sourcePort, destPort, moreFragments, countFragments,
                                      durationSeconds, srcPayloadBytes, destPayloadBytes, srcTotalBytes,
                                      destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
-                                     recordForceOut);
-
+                                      recordForceOut);
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));
       currentEvent++;
