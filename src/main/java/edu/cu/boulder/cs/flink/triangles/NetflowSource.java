@@ -33,27 +33,27 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
   /// When the first netflow was created
   private double t1;
 
-  public int samGeneratedId;
-  public int label;
-  public double timeSeconds;
-  public String parseDate;
-  public String dateTimeString;
-  public String protocol;
-  public String protocolCode;
-  public String sourceIp;
-  public String destIp;
-  public int sourcePort;
-  public int destPort;
-  public String moreFragments;
-  public int countFragments;
-  public double durationSeconds;
-  public long srcPayloadBytes;
-  public long destPayloadBytes;
-  public long srcTotalBytes;
-  public long destTotalBytes;
-  public long firstSeenSrcPacketCount;
-  public long firstSeenDestPacketCount;
-  public int recordForceOut;
+//  public int samGeneratedId;
+//  public int label;
+//  public double timeSeconds;
+//  public String parseDate;
+//  public String dateTimeString;
+//  public String protocol;
+//  public String protocolCode;
+//  public String sourceIp;
+//  public String destIp;
+//  public int sourcePort;
+//  public int destPort;
+//  public String moreFragments;
+//  public int countFragments;
+//  public double durationSeconds;
+//  public long srcPayloadBytes;
+//  public long destPayloadBytes;
+//  public long srcTotalBytes;
+//  public long destTotalBytes;
+//  public long firstSeenSrcPacketCount;
+//  public long firstSeenDestPacketCount;
+//  public int recordForceOut;
 // Adds below
   public int unix_secs;      //Current count of seconds since epoch.
   public int unix_nsecs;     //Residual nanonseconds since epoch.
@@ -148,14 +148,14 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
       String destIp = "node" + dest;
       //String sourceIp = "node0";
       //String destIp = "node1";
-      Netflow netflow = new Netflow(currentEvent, label, time,
-                                     parseDate, dateTimeString, protocol, protocolCode,
-                                     sourceIp, destIp, sourcePort, destPort, moreFragments, countFragments,
-                                     durationSeconds, srcPayloadBytes, destPayloadBytes, srcTotalBytes,
-                                     destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
-                                      recordForceOut);
+//      Netflow netflow = new Netflow(currentEvent, label, time,
+//                                     parseDate, dateTimeString, protocol, protocolCode,
+//                                     sourceIp, destIp, sourcePort, destPort, moreFragments, countFragments,
+//                                     durationSeconds, srcPayloadBytes, destPayloadBytes, srcTotalBytes,
+//                                     destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
+//                                      recordForceOut);
 // Adds below
-//      Netflow netflow = new Netflow(first, srcaddr, destaddr);
+      Netflow netflow = new Netflow(first, srcaddr, destaddr);
 
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));
