@@ -94,23 +94,23 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
     this.increment = 1 / rate;
     //this.random = new Random();
 
-    label = 0;
-    parseDate = "parseDate";
-    dateTimeString = "dateTimeString";
-    protocol = "protocol";
-    protocolCode = "protocolCode";
-    sourcePort = 80;
-    destPort = 80;
-    moreFragments = "moreFragments";
-    countFragments = 0;
-    durationSeconds = 0.1;
-    srcPayloadBytes = 10;
-    destPayloadBytes = 10;
-    srcTotalBytes = 15;
-    destTotalBytes = 15;
-    firstSeenSrcPacketCount = 5;
-    firstSeenDestPacketCount =5;
-    recordForceOut = 0;
+//    label = 0;
+//    parseDate = "parseDate";
+//    dateTimeString = "dateTimeString";
+//    protocol = "protocol";
+//    protocolCode = "protocolCode";
+//    sourcePort = 80;
+//    destPort = 80;
+//    moreFragments = "moreFragments";
+//    countFragments = 0;
+//    durationSeconds = 0.1;
+//    srcPayloadBytes = 10;
+//    destPayloadBytes = 10;
+//    srcTotalBytes = 15;
+//    destTotalBytes = 15;
+//    firstSeenSrcPacketCount = 5;
+//    firstSeenDestPacketCount =5;
+//    recordForceOut = 0;
   }
 
   @Override
