@@ -95,7 +95,7 @@ public class Netflow {
 //                 int engine_type,
 //                 int engine_id,
                  String srcaddr,
-                 String destaddr,
+                 String destaddr
 //                 String nexthop,
 //                 int input,
 //                 int output,
