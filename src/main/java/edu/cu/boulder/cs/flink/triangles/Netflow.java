@@ -107,7 +107,8 @@ public class Netflow {
 //                 int src_mask,
 //                 int dst_mask,
 //                 int src_as,
-//                 int dst_as)
+//                 int dst_as
+                )
   {
 //    this.label = label;;
 //    this.timeSeconds = timeSeconds;
