@@ -1,9 +1,42 @@
 package edu.cu.boulder.cs.flink.triangles;
 
 /**
-Updated to ingest SAL format
+ * This class represents a netflow.  The fields came from the VAST Challenge
+ * 2013: Mini-Challenge 3 dataset and the format they used.
+ * http://vacommunity.org/VAST+Challenge+2013%3A+Mini-Challenge+3
+ * There are different formats for netflows, version 5 and version 9
+ * are the most popular.  To represent those formats, likely another
+ * class is needed.
+ *
+ * The samGeneratedId and the label fields came from the Streaming
+ * Analytics Machine (github/elgood/SAM).  These don't come from
+ * the netflow representation but are used by SAM internally.  I added
+ * them here to compare directly with the SAM implementation.
+ //Updated to ingest SAL format
  */
-public class NetflowV5 {
+public class Netflow {
+  public int samGeneratedId;
+  public int label;
+  public double timeSeconds;
+  public String parseDate;
+  public String dateTimeString;
+  public String protocol;
+  public String protocolCode;
+  public String sourceIp;
+  public String destIp;
+  public int sourcePort;
+  public int destPort;
+  public String moreFragments;
+  public int countFragments;
+  public double durationSeconds;
+  public long srcPayloadBytes;
+  public long destPayloadBytes;
+  public long srcTotalBytes;
+  public long destTotalBytes;
+  public long firstSeenSrcPacketCount;
+  public long firstSeenDestPacketCount;
+  public int recordForceOut;
+// Adds below
   public int unix_secs;      //Current count of seconds since epoch.
   public int unix_nsecs;     //Residual nanonseconds since epoch.
   public int sysuptime;      //Current time in ms since export device booted.
@@ -29,7 +62,29 @@ public class NetflowV5 {
   public int src_as;         //Autonomous system number of the source, either origin or peer.
   public int dst_as;         //Autonomous system number of the destination, either origin or peer.
 
-  public NetflowV5(int label,
+  public Netflow(int samGeneratedId,
+                 int label,
+                 double timeSeconds,
+                 String parseDate,
+                 String dateTimeString,
+                 String protocol,
+                 String protocolCode,
+                 String sourceIp,
+                 String destIp,
+                 int sourcePort,
+                 int destPort,
+                 String moreFragments,
+                 int countFragments,
+                 double durationSeconds,
+                 long srcPayloadBytes,
+                 long destPayloadBytes,
+                 long srcTotalBytes,
+                 long destTotalBytes,
+                 long firstSeenSrcPacketCount,
+                 long firstSeenDestPacketCount,
+                 int recordForceOut,
+// Adds below
+                 int label,
                  int unix_secs,
                  int unix_nsecs,
                  int sysuptime,
@@ -55,6 +110,27 @@ public class NetflowV5 {
                  int src_as,
                  int dst_as)
   {
+    this.label = label;;
+    this.timeSeconds = timeSeconds;
+    this.parseDate = parseDate;
+    this.dateTimeString = dateTimeString;
+    this.protocol = protocol;
+    this.protocolCode = protocolCode;
+    this.sourceIp = sourceIp;
+    this.destIp = destIp;
+    this.sourcePort = sourcePort;
+    this.destPort = destPort;
+    this.moreFragments = moreFragments;
+    this.countFragments = countFragments;
+    this.durationSeconds = durationSeconds;
+    this.srcPayloadBytes = srcPayloadBytes;
+    this.destPayloadBytes = destPayloadBytes;
+    this.srcTotalBytes = srcTotalBytes;
+    this.destTotalBytes = destTotalBytes;
+    this.firstSeenSrcPacketCount = firstSeenSrcPacketCount;
+    this.firstSeenDestPacketCount = firstSeenDestPacketCount;
+    this.recordForceOut = recordForceOut;
+// Adds below
     this.unix_secs = unix_secs;
     this.unix_nsecs = unix_nsecs;
     this.sysuptime = sysuptime;
@@ -88,6 +164,8 @@ public class NetflowV5 {
    */
   public String toString()
   {
-    return first + ", " + srcaddr + ", " + destaddr;
+    return timeSeconds + ", " + sourceIp + ", " + destIp;
+// Adds below
+//    return first + ", " + srcaddr + ", " + destaddr;
   }
 }

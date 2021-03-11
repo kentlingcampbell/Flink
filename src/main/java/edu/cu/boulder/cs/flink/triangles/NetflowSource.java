@@ -54,6 +54,31 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
   public long firstSeenSrcPacketCount;
   public long firstSeenDestPacketCount;
   public int recordForceOut;
+// Adds below
+  public int unix_secs;      //Current count of seconds since epoch.
+  public int unix_nsecs;     //Residual nanonseconds since epoch.
+  public int sysuptime;      //Current time in ms since export device booted.
+  public String exaddr;      //The address of the export machine.
+  public int dpkts;          //Packets in the flow.
+  public int doctets;        //Total number of Layer 3 bytes in the packets of the flow.
+  public int first;          //System uptime at start of flow.
+  public int last;           //System uptime at the time the last packet of the flow was received.
+  public int engine_type;    //Type of flow-switching engine.
+  public int engine_id;      //Slot number of the flow-switching engine.
+  public String srcaddr;     //Source IP address.
+  public String destaddr;    //Destination IP address.
+  public String nexthop;     //IP address of next hop router.
+  public int input;          //SNMP index of input interface.
+  public int output;         //SNMP index of output interface.
+  public int srcport;        //TCP/UDP source port number or equivalent.
+  public int dstport;        //TCP/UDP destination port number or equivalent.
+  public int prot;           //IP protocol type (e.g. TCP=6; UDP=17)
+  public int tos;            //IP type of service (ToS)
+  public int tcp_flags;      //Cumulative OR of TCP flags.
+  public int src_mask;       //Source address prefix mask bits.
+  public int dst_mask;       //Destination address prefix mask bits.
+  public int src_as;         //Autonomous system number of the source, either origin or peer.
+  public int dst_as;         //Autonomous system number of the destination, either origin or peer.
 
   /**
    *
@@ -129,6 +154,9 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
                                      durationSeconds, srcPayloadBytes, destPayloadBytes, srcTotalBytes,
                                      destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
                                       recordForceOut);
+// Adds below
+//      Netflow netflow = new Netflow(first, srcaddr, destaddr);
+
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));
       currentEvent++;
