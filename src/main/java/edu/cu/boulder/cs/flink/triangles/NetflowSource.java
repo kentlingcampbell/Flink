@@ -86,13 +86,21 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
    * @param numIps The number of ips in the pool.
    * @param rate The rate of netflows produced in netflows/s.
    */
-  public NetflowSource(int numEvents, int numIps, double rate)
+//  public NetflowSource(int numEvents, int numIps, double rate)
+// Adds below
+  public NetflowSource(int first, String srcaddr, String destaddr)
   {
-    this.numEvents = numEvents;
-    currentEvent = 0;
-    this.numIps = numIps;
-    this.increment = 1 / rate;
+//    this.numEvents = numEvents;
+//    currentEvent = 0;
+//    this.numIps = numIps;
+//    this.increment = 1 / rate;
     //this.random = new Random();
+// Adds below
+    this.first = first;
+    currentEvent = 0;
+    this.srcaddr = srcaddr;
+    this.destaddr = destaddr;
+//    this.increment = 1 / rate;    
 
 //    label = 0;
 //    parseDate = "parseDate";
