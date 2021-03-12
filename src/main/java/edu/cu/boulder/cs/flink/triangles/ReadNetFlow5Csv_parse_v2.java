@@ -28,7 +28,7 @@ public class ReadNetFlow5Csv_parse_v2
         //Get all tokens available in line
         String[] data = line.split(DELIMITER);
         //System.out.println(data[0] + ' ' + data[10] + ' ' + data[11]);
-        x = data[0];
+        //x = data[0];
         //parseData(data[6]);
         //new Netflow();
       }
