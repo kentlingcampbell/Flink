@@ -61,12 +61,15 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
 //  public String exaddr;      //The address of the export machine.
 //  public int dpkts;          //Packets in the flow.
 //  public int doctets;        //Total number of Layer 3 bytes in the packets of the flow.
-  public int first;          //System uptime at start of flow.
+//  public int first;          //System uptime at start of flow.
+  public double timeSeconds;
 //  public int last;           //System uptime at the time the last packet of the flow was received.
 //  public int engine_type;    //Type of flow-switching engine.
 //  public int engine_id;      //Slot number of the flow-switching engine.
-  public String srcaddr;     //Source IP address.
-  public String destaddr;    //Destination IP address.
+//  public String srcaddr;     //Source IP address.
+//  public String destaddr;    //Destination IP address.
+  public String sourceIp;
+  public String destIp;
 //  public String nexthop;     //IP address of next hop router.
 //  public int input;          //SNMP index of input interface.
 //  public int output;         //SNMP index of output interface.
@@ -96,10 +99,10 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
 //    this.increment = 1 / rate;
     //this.random = new Random();
 // Adds below
-    this.first = first;
+    this.timeSeconds = timeSeconds;
     currentEvent = 0;
-    this.srcaddr = srcaddr;
-    this.destaddr = destaddr;
+    this.sourceIp = sourceIp;
+    this.destIp = destIp;
 //    this.increment = 1 / rate;
 
 //    label = 0;
@@ -163,12 +166,12 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
 //                                     destTotalBytes, firstSeenSrcPacketCount, firstSeenDestPacketCount,
 //                                      recordForceOut);
 // Adds below
-      Netflow netflow = new Netflow(first, srcaddr, destaddr);
+      Netflow netflow = new Netflow(timeSeconds, sourceIp, destIp);
 
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));
-      currentEvent++;
-      time += increment;
+//      currentEvent++;
+//      time += increment;
     }
   }
 

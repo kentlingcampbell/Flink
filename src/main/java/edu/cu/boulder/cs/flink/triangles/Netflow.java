@@ -43,12 +43,15 @@ public class Netflow {
 //  public String exaddr;      //The address of the export machine.
 //  public int dpkts;          //Packets in the flow.
 //  public int doctets;        //Total number of Layer 3 bytes in the packets of the flow.
-  public int first;          //System uptime at start of flow.
+//  public int first;          //System uptime at start of flow.
+    public double timeSeconds;
 //  public int last;           //System uptime at the time the last packet of the flow was received.
 //  public int engine_type;    //Type of flow-switching engine.
 //  public int engine_id;      //Slot number of the flow-switching engine.
-  public String srcaddr;     //Source IP address.
-  public String destaddr;    //Destination IP address.
+//  public String srcaddr;     //Source IP address.
+//  public String destaddr;    //Destination IP address.
+    public String sourceIp;
+    public String destIp;
 //  public String nexthop;     //IP address of next hop router.
 //  public int input;          //SNMP index of input interface.
 //  public int output;         //SNMP index of output interface.
@@ -90,12 +93,15 @@ public class Netflow {
 //                 String exaddr,
 //                 int dpkts,
 //                 int doctets,
-                 int first,
+//                 int first,
+                 double timeSeconds,
 //                 int last,
 //                 int engine_type,
 //                 int engine_id,
-                 String srcaddr,
-                 String destaddr
+//                 String srcaddr,
+//                 String destaddr
+                 String sourceIp,
+                 String destIp
 //                 String nexthop,
 //                 int input,
 //                 int output,
@@ -108,7 +114,7 @@ public class Netflow {
 //                 int dst_mask,
 //                 int src_as,
 //                 int dst_as
-                )
+)
   {
 //    this.label = label;;
 //    this.timeSeconds = timeSeconds;
@@ -137,12 +143,15 @@ public class Netflow {
 //    this.exaddr = exaddr;
 //    this.dpkts = dpkts;
 //    this.doctets = doctets;
-    this.first = first;
+//    this.first = first;
+    this.timeSeconds = timeSeconds;
 //    this.last = last;
 //    this.engine_type = engine_type;
 //    this.engine_id = engine_id;
-    this.srcaddr = srcaddr;
-    this.destaddr = destaddr;
+//    this.srcaddr = srcaddr;
+//    this.destaddr = destaddr;
+    this.sourceIp = sourceIp;
+    this.destIp = destIp;
 //    this.nexthop = nexthop;
 //    this.input = input;
 //    this.output = output;
@@ -164,8 +173,6 @@ public class Netflow {
    */
   public String toString()
   {
-//    return timeSeconds + ", " + sourceIp + ", " + destIp;
-// Adds below
-    return first + ", " + srcaddr + ", " + destaddr;
+    return timeSeconds + ", " + sourceIp + ", " + destIp;
   }
 }
