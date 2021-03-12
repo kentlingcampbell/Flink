@@ -1,4 +1,4 @@
-//package edu.cu.boulder.cs.flink.triangles;
+package edu.cu.boulder.cs.flink.triangles;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
