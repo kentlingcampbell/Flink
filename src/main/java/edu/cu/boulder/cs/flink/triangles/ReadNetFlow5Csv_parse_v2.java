@@ -27,10 +27,10 @@ public class ReadNetFlow5Csv_parse_v2
       {
         //Get all tokens available in line
         String[] data = line.split(DELIMITER);
-        //System.out.println(data[0] + ' ' + data[10] + ' ' + data[11]);
-        //x = data[0];
-        //parseData(data[6]);
-        //new Netflow();
+        System.out.println(data[0] + ' ' + data[10] + ' ' + data[11]);
+        timeSeconds = data[0];
+        sourceIp = data[10];
+        destIp = data[11];
       }
     }
     catch (Exception e) {
@@ -47,12 +47,11 @@ public class ReadNetFlow5Csv_parse_v2
   }
     private static void parseData(String str){
     String amount;
-    //Scanner lineScanner = new Scanner(str);
-    //lineScanner.useDelimiter(",");
-    //while(lineScanner.hasNext()){
-    //  acctFrom = lineScanner.next();
-    //  acctTo = lineScanner.next();
-    //  amount = lineScanner.next();
+    Netflow netflow = new Netflow(data[0], data[10], data[11]);
+    while(csvReader.hasNext()){
+      acctFrom = lineScanner.next();
+      acctTo = lineScanner.next();
+      amount = lineScanner.next();
     System.out.println("Value");
     }
     //lineScanner.close();
