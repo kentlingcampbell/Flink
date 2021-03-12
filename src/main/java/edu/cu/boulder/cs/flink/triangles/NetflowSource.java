@@ -91,7 +91,7 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
    */
 //  public NetflowSource(int numEvents, int numIps, double rate)
 // Adds below
-  public NetflowSource(int first, String srcaddr, String destaddr)
+  public NetflowSource(int timeSeconds, String sourceIp, String destIp)
   {
 //    this.numEvents = numEvents;
 //    currentEvent = 0;
