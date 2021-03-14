@@ -18,6 +18,8 @@ public class ReadNetFlow5Csv_parse_v2
 
     try
     {
+
+
       String line = "";
       //parsing a CSV file into BufferedReader class constructor
       csvReader = new BufferedReader(new FileReader(fileToParse));
@@ -56,4 +58,3 @@ public class ReadNetFlow5Csv_parse_v2
     }
     //lineScanner.close();
   }
-}

@@ -23,7 +23,7 @@ public class Netflow {
                  String sourceIp,
                  String destIp
                  int dst_as
-)
+                 )
   {
     this.timeSeconds = timeSeconds;
     this.sourceIp = sourceIp;

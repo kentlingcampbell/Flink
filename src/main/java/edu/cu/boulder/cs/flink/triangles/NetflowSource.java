@@ -7,7 +7,6 @@ import org.apache.flink.streaming.api.watermark.Watermark;
 import java.time.Instant;
 import java.util.Random;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
