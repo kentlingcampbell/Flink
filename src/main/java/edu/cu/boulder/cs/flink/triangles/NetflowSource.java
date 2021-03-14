@@ -17,7 +17,8 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
 
   public NetflowSource(String filename)
   {
-    this.csvReader = new BufferedReader(new FileReader(fileToParse));
+    //this.csvReader = new BufferedReader(new FileReader(fileToParse));
+    this.csvReader = new BufferedReader(new FileReader("testfile.csv"));
   }
 
   @Override
