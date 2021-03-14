@@ -27,7 +27,7 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
     int taskId = context.getIndexOfThisSubtask();
     this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
     while ((line = csvReader.readLine()) != null) {
-      String[] data = line.split(DELIMITER);
+      String[] data = line.split(",");
       Double timeSeconds = Double.parseDouble(data[0]);
       Long t = (Long) timeSeconds;
       String sourceIp = data[10];
