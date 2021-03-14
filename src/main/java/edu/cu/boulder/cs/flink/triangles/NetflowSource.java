@@ -7,7 +7,12 @@ import org.apache.flink.streaming.api.watermark.Watermark;
 import java.time.Instant;
 import java.util.Random;
 
-public class NetflowSource extends RichParallelSourceFunction<Netflow> {
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class NetflowSource extends RichParallelSourceFunction <Netflow> {
   BufferedReader csvReader;
 
   public NetflowSource(String filename)
@@ -16,19 +21,18 @@ public class NetflowSource extends RichParallelSourceFunction<Netflow> {
   }
 
   @Override
-  public void run(SourceContext<Netflow> out) throws Exception
+  public void run(SourceContext <Netflow> out) throws Exception
   {
     RuntimeContext context = getRuntimeContext();
     int taskId = context.getIndexOfThisSubtask();
+    this.csvReader = new BufferedReader(new FileReader("testfile.csv"));
     while ((line = csvReader.readLine()) != null){
       String[] data = line.split(DELIMITER);
       Double timeSeconds = Double.parseDouble(data[0]);
       Long t = (Long) timeSeconds ;
       String sourceIp = data[10];
       String destIp = data[11];
-
       //System.out.println(data[0] + ' ' + data[10] + ' ' + data[11]);
-
       Netflow netflow = new Netflow(timeSeconds, sourceIp, destIp);
       out.collectWithTimestamp(netflow, t);
       out.emitWatermark(new Watermark(t));

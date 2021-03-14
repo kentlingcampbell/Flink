@@ -56,3 +56,4 @@ public class ReadNetFlow5Csv_parse_v2
     }
     //lineScanner.close();
   }
+}
