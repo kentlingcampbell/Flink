@@ -1,0 +1,17 @@
+
+
+1st - change source in NetflowSource.java  -->  source ip dest ip timestamp
+
+
+
+2nd - change BenchmarkTrianglesNetflow to enable A<-B->C
+COMPLETED changed line 256 
+//        .keyBy(new DestKeySelector())
+        .keyBy(new SourceKeySelector())
+//        .intervalJoin(netflows.keyBy(new SourceKeySelector()))
+        .intervalJoin(netflows.keyBy(new DestKeySelector()))
+
+3rd - created NetflowV5.java
+
+4th - map-reduce count
+

@@ -21,7 +21,7 @@ public class Netflow {
 
   public Netflow(double timeSeconds,
                  String sourceIp,
-                 String destIp
+                 String destIp,
                  int dst_as
                  )
   {
