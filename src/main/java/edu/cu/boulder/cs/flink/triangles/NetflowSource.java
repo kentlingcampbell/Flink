@@ -13,7 +13,8 @@ import java.io.IOException;
 
 public class NetflowSource extends RichParallelSourceFunction <Netflow> {
 //  BufferedReader csvReader;
-
+  public String filename;
+  
   public NetflowSource(String filename)
   {
     try {
