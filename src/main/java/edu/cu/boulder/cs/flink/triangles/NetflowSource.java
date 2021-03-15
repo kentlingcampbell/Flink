@@ -24,26 +24,24 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
   public void run(SourceContext <Netflow> out) throws Exception
   {
     try {
-      this.csvReader = new BufferedReader(new FileReader(filename));
+      BufferedReader csvReader = new BufferedReader(new FileReader(filename));
+
+      //this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
+      String line = "";
+      while ((line = csvReader.readLine()) != null) {
+        String[] data = line.split(",");
+        Long timeSeconds = Long.parseLong(data[0]);
+        Long t = timeSeconds;
+        String sourceIp = data[10];
+        String destIp = data[11];
+        //System.out.println(data[0] + ' ' + data[10] + ' ' + data[11]);
+        Netflow netflow = new Netflow(timeSeconds, sourceIp, destIp);
+        out.collectWithTimestamp(netflow, t);
+        out.emitWatermark(new Watermark(t));
+      }
     } catch (java.io.IOException e) {
 
       System.out.println("Oh no");
-    }
-    BufferedReader csvReader = new BufferedReader(new FileReader(filename));
-    RuntimeContext context = getRuntimeContext();
-    int taskId = context.getIndexOfThisSubtask();
-    //this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
-    String line = "";
-    while ((line = csvReader.readLine()) != null) {
-      String[] data = line.split(",");
-      Long timeSeconds = Long.parseLong(data[0]);
-      Long t = timeSeconds;
-      String sourceIp = data[10];
-      String destIp = data[11];
-      //System.out.println(data[0] + ' ' + data[10] + ' ' + data[11]);
-      Netflow netflow = new Netflow(timeSeconds, sourceIp, destIp);
-      out.collectWithTimestamp(netflow, t);
-      out.emitWatermark(new Watermark(t));
     }
   }
 
