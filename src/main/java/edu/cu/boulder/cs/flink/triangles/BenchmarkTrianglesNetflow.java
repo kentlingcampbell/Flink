@@ -215,7 +215,7 @@ public class BenchmarkTrianglesNetflow {
       System.exit(1);
     }
 
-    String fileToParse = cmd.getOptionValue("parseFile"));
+    String fileToParse = cmd.getOptionValue("parseFile");
     double queryWindow = Double.parseDouble(cmd.getOptionValue("queryWindow"));
     String outputFile = cmd.getOptionValue("outputFile");
     String outputNetflowFile = cmd.getOptionValue("outputNetflow");
