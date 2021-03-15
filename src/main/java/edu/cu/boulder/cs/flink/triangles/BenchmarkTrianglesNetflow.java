@@ -181,14 +181,14 @@ public class BenchmarkTrianglesNetflow {
   public static void main(String[] args) throws Exception {
 
     Options options = new Options();
-    Option numNetflowsOption = new Option("nn", "numNetflows", true,
-        "Number of netflows to create per source.");
-    Option numIpsOption = new Option("nip", "numIps", true,
-        "Number of ips in the pool.");
-    Option rateOption = new Option("r", "rate", true,
-        "The rate that netflows are generated.");
-    Option numSourcesOption = new Option("ns", "numSources", true,
-        "The number of netflow sources.");
+//    Option numNetflowsOption = new Option("nn", "numNetflows", true,
+//        "Number of netflows to create per source.");
+//    Option numIpsOption = new Option("nip", "numIps", true,
+//        "Number of ips in the pool.");
+//    Option rateOption = new Option("r", "rate", true,
+//        "The rate that netflows are generated.");
+//    Option numSourcesOption = new Option("ns", "numSources", true,
+//        "The number of netflow sources.");
     Option queryWindowOption = new Option("qw", "queryWindow", true,
         "The length of the query in seconds.");
     Option outputFileOption = new Option("out", "outputFile", true,
@@ -198,17 +198,17 @@ public class BenchmarkTrianglesNetflow {
     Option outputTriadOption = new Option("triad", "outputTriads", true,
         "Where the triads should go (optional).");
 
-    numNetflowsOption.setRequired(true);
-    numIpsOption.setRequired(true);
-    rateOption.setRequired(true);
-    numSourcesOption.setRequired(true);
+//    numNetflowsOption.setRequired(true);
+//    numIpsOption.setRequired(true);
+//    rateOption.setRequired(true);
+//    numSourcesOption.setRequired(true);
     queryWindowOption.setRequired(true);
     outputFileOption.setRequired(true);
 
-    options.addOption(numNetflowsOption);
-    options.addOption(numIpsOption);
-    options.addOption(rateOption);
-    options.addOption(numSourcesOption);
+//    options.addOption(numNetflowsOption);
+//    options.addOption(numIpsOption);
+//    options.addOption(rateOption);
+//    options.addOption(numSourcesOption);
     options.addOption(queryWindowOption);
     options.addOption(outputFileOption);
     options.addOption(outputNetflowOption);
@@ -227,10 +227,10 @@ public class BenchmarkTrianglesNetflow {
       System.exit(1);
     }
 
-    int numEvents = Integer.parseInt(cmd.getOptionValue("numNetflows"));
-    int numIps = Integer.parseInt(cmd.getOptionValue("numIps"));
-    double rate = Double.parseDouble(cmd.getOptionValue("rate"));
-    int numSources = Integer.parseInt(cmd.getOptionValue("numSources"));
+//    int numEvents = Integer.parseInt(cmd.getOptionValue("numNetflows"));
+//    int numIps = Integer.parseInt(cmd.getOptionValue("numIps"));
+//    double rate = Double.parseDouble(cmd.getOptionValue("rate"));
+//    int numSources = Integer.parseInt(cmd.getOptionValue("numSources"));
     double queryWindow = Double.parseDouble(cmd.getOptionValue("queryWindow"));
     String outputFile = cmd.getOptionValue("outputFile");
     String outputNetflowFile = cmd.getOptionValue("outputNetflow");
@@ -243,7 +243,7 @@ public class BenchmarkTrianglesNetflow {
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
     // Get a stream of netflows from the NetflowSource
-    NetflowSource netflowSource = new NetflowSource(numEvents, numIps, rate);
+    NetflowSource netflowSource = new NetflowSource(timeSeconds, sourceIp, destIp);
     DataStreamSource<Netflow> netflows = env.addSource(netflowSource);
 
     // If specified, we write out the raw data we see to a file.

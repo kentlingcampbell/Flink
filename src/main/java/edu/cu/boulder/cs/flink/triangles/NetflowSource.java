@@ -30,7 +30,6 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
     while ((line = csvReader.readLine()) != null) {
       String[] data = line.split(",");
       Long timeSeconds = Long.parseLong(data[0]);
-//      Long t = (Long) timeSeconds;
       Long t = timeSeconds;
       String sourceIp = data[10];
       String destIp = data[11];
