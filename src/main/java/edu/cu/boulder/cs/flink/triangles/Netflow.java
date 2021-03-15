@@ -21,7 +21,7 @@ public class Netflow {
 
   public Netflow(Long timeSeconds,
                  String sourceIp,
-                 String destIp,
+                 String destIp
                  )
   {
     this.timeSeconds = timeSeconds;
