@@ -15,11 +15,11 @@ package edu.cu.boulder.cs.flink.triangles;
  // Updated to ingest SAL format
  */
 public class Netflow {
-    public double timeSeconds;
+    public Long timeSeconds;
     public String sourceIp;
     public String destIp;
 
-  public Netflow(double timeSeconds,
+  public Netflow(Long timeSeconds,
                  String sourceIp,
                  String destIp,
                  int dst_as
