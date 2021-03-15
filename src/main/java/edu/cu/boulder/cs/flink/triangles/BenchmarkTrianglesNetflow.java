@@ -181,16 +181,8 @@ public class BenchmarkTrianglesNetflow {
   public static void main(String[] args) throws Exception {
 
     Options options = new Options();
-//    Option numNetflowsOption = new Option("nn", "numNetflows", true,
-//        "Number of netflows to create per source.");
-//    Option numIpsOption = new Option("nip", "numIps", true,
-//        "Number of ips in the pool.");
-//    Option rateOption = new Option("r", "rate", true,
-//        "The rate that netflows are generated.");
-//    Option numSourcesOption = new Option("ns", "numSources", true,
-//        "The number of netflow sources.");
-    Option parseFile = new Option("pf", "parseFile", true,
-        "Input CSV netflow");
+    Option parseFile = new Option("file", "parseFile", true,
+        "Input CSV netflow file");
     Option queryWindowOption = new Option("qw", "queryWindow", true,
         "The length of the query in seconds.");
     Option outputFileOption = new Option("out", "outputFile", true,
@@ -200,18 +192,10 @@ public class BenchmarkTrianglesNetflow {
     Option outputTriadOption = new Option("triad", "outputTriads", true,
         "Where the triads should go (optional).");
 
-//    numNetflowsOption.setRequired(true);
-//    numIpsOption.setRequired(true);
-//    rateOption.setRequired(true);
-//    numSourcesOption.setRequired(true);
     parseFile.setRequired(true);
     queryWindowOption.setRequired(true);
     outputFileOption.setRequired(true);
 
-//    options.addOption(numNetflowsOption);
-//    options.addOption(numIpsOption);
-//    options.addOption(rateOption);
-//    options.addOption(numSourcesOption);
     options.addOption(parseFile);
     options.addOption(queryWindowOption);
     options.addOption(outputFileOption);
@@ -231,10 +215,6 @@ public class BenchmarkTrianglesNetflow {
       System.exit(1);
     }
 
-//    int numEvents = Integer.parseInt(cmd.getOptionValue("numNetflows"));
-//    int numIps = Integer.parseInt(cmd.getOptionValue("numIps"));
-//    double rate = Double.parseDouble(cmd.getOptionValue("rate"));
-//    int numSources = Integer.parseInt(cmd.getOptionValue("numSources"));
     String fileToParse = cmd.getOptionValue("parseFile"));
     double queryWindow = Double.parseDouble(cmd.getOptionValue("queryWindow"));
     String outputFile = cmd.getOptionValue("outputFile");
