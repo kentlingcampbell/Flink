@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class NetflowSource extends RichParallelSourceFunction <Netflow> {
-  BufferedReader csvReader;
+//  BufferedReader csvReader;
 
   public NetflowSource(String filename)
   {
@@ -28,6 +28,7 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
   @Override
   public void run(SourceContext <Netflow> out) throws Exception
   {
+    BufferedReader csvReader;
     RuntimeContext context = getRuntimeContext();
     int taskId = context.getIndexOfThisSubtask();
     //this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
