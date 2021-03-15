@@ -28,7 +28,7 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
   @Override
   public void run(SourceContext <Netflow> out) throws Exception
   {
-    BufferedReader csvReader;
+    csvReader = new BufferedReader(new FileReader(filename));
     RuntimeContext context = getRuntimeContext();
     int taskId = context.getIndexOfThisSubtask();
     //this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
