@@ -189,6 +189,8 @@ public class BenchmarkTrianglesNetflow {
 //        "The rate that netflows are generated.");
 //    Option numSourcesOption = new Option("ns", "numSources", true,
 //        "The number of netflow sources.");
+    Option parseFile = new Option("pf", "parseFile", true,
+        "Input CSV netflow");
     Option queryWindowOption = new Option("qw", "queryWindow", true,
         "The length of the query in seconds.");
     Option outputFileOption = new Option("out", "outputFile", true,
@@ -202,6 +204,7 @@ public class BenchmarkTrianglesNetflow {
 //    numIpsOption.setRequired(true);
 //    rateOption.setRequired(true);
 //    numSourcesOption.setRequired(true);
+    parseFile.setRequired(true);
     queryWindowOption.setRequired(true);
     outputFileOption.setRequired(true);
 
@@ -209,6 +212,7 @@ public class BenchmarkTrianglesNetflow {
 //    options.addOption(numIpsOption);
 //    options.addOption(rateOption);
 //    options.addOption(numSourcesOption);
+    options.addOption(parseFile);
     options.addOption(queryWindowOption);
     options.addOption(outputFileOption);
     options.addOption(outputNetflowOption);
@@ -231,6 +235,7 @@ public class BenchmarkTrianglesNetflow {
 //    int numIps = Integer.parseInt(cmd.getOptionValue("numIps"));
 //    double rate = Double.parseDouble(cmd.getOptionValue("rate"));
 //    int numSources = Integer.parseInt(cmd.getOptionValue("numSources"));
+    String fileToParse = cmd.getOptionValue("parseFile"));
     double queryWindow = Double.parseDouble(cmd.getOptionValue("queryWindow"));
     String outputFile = cmd.getOptionValue("outputFile");
     String outputNetflowFile = cmd.getOptionValue("outputNetflow");
@@ -243,7 +248,7 @@ public class BenchmarkTrianglesNetflow {
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
     // Get a stream of netflows from the NetflowSource
-    NetflowSource netflowSource = new NetflowSource(timeSeconds, sourceIp, destIp);
+    NetflowSource netflowSource = new NetflowSource(fileToParse);
     DataStreamSource<Netflow> netflows = env.addSource(netflowSource);
 
     // If specified, we write out the raw data we see to a file.
