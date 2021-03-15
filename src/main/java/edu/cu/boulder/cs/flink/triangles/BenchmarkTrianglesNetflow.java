@@ -243,7 +243,7 @@ public class BenchmarkTrianglesNetflow {
 //        .intervalJoin(netflows.keyBy(new SourceKeySelector()))
 // Adds below
         .intervalJoin(netflows.keyBy(new DestKeySelector()))
-        .between(Time.milliseconds(0), Time.milliseconds((long) queryWindow * 1000))
+        .between(Time.milliseconds(0), Time.milliseconds((long) (queryWindow * 1000)))
         .process(new EdgeJoiner(queryWindow));
 
     // If specified, we spit out the triads we found to disk.
@@ -255,7 +255,7 @@ public class BenchmarkTrianglesNetflow {
     DataStream<Triangle> triangles = triads
         .keyBy(new TriadKeySelector())
         .intervalJoin(netflows.keyBy(new LastEdgeKeySelector()))
-        .between(Time.milliseconds(0), Time.milliseconds((long) queryWindow * 1000))
+        .between(Time.milliseconds(0), Time.milliseconds((long) (queryWindow * 1000)))
         .process(new TriadJoiner(queryWindow));
 
     // Write the triangles we found to disk.

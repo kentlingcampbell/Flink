@@ -16,7 +16,12 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
 
   public NetflowSource(String filename)
   {
-    this.csvReader = new BufferedReader(new FileReader(fileToParse));
+    try {
+      this.csvReader = new BufferedReader(new FileReader(filename));
+    } catch (java.io.IOException e) {
+
+      System.out.println("Oh no");
+    }
     //this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
   }
 
@@ -25,7 +30,6 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
   {
     RuntimeContext context = getRuntimeContext();
     int taskId = context.getIndexOfThisSubtask();
-    this.csvReader = new BufferedReader(new FileReader(filetoParse));
     //this.csvReader = new BufferedReader(new FileReader("/data/converted/test.csv"));
     String line = "";
     while ((line = csvReader.readLine()) != null) {
