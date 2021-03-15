@@ -43,6 +43,6 @@ public class NetflowSource extends RichParallelSourceFunction <Netflow> {
   @Override
   public void cancel()
   {
-    this.currentEvent = numEvents;
+//    this.currentEvent = numEvents;
   }
 }
