@@ -216,15 +216,14 @@ public class BenchmarkTrianglesNetflow {
     }
 
     String fileToParse = cmd.getOptionValue("parseFile");
-    double queryWindow = Double.parseDouble(cmd.getOptionValue("queryWindow"));
+    Double queryWindow = Double.parseDouble(cmd.getOptionValue("queryWindow"));
     String outputFile = cmd.getOptionValue("outputFile");
     String outputNetflowFile = cmd.getOptionValue("outputNetflow");
     String outputTriadFile = cmd.getOptionValue("outputTriads");
 
-
     // get the execution environment
     final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-    env.setParallelism(numSources);
+//    env.setParallelism(numSources);
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
     // Get a stream of netflows from the NetflowSource
