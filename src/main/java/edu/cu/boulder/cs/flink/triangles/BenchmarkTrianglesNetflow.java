@@ -187,10 +187,6 @@ public class BenchmarkTrianglesNetflow {
         "The length of the query in seconds.");
     Option outputFileOption = new Option("out", "outputFile", true,
         "Where the output should go.");
-    Option outputNetflowOption = new Option("net", "outputNetflow", true,
-        "Where the netflows should go (optional).");
-    Option outputTriadOption = new Option("triad", "outputTriads", true,
-        "Where the triads should go (optional).");
 
     parseFile.setRequired(true);
     queryWindowOption.setRequired(true);
@@ -199,8 +195,6 @@ public class BenchmarkTrianglesNetflow {
     options.addOption(parseFile);
     options.addOption(queryWindowOption);
     options.addOption(outputFileOption);
-    options.addOption(outputNetflowOption);
-    options.addOption(outputTriadOption);
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter();
@@ -237,29 +231,19 @@ public class BenchmarkTrianglesNetflow {
 
     // Transforms the netflows into a stream of triads
     DataStream<Triad> triads = netflows
+// BELOW IS FOR A->B->C
 //        .keyBy(new DestKeySelector())
-// Adds below
+// BELOW IS FOR A<-B->C
         .keyBy(new SourceKeySelector())
-//        .intervalJoin(netflows.keyBy(new SourceKeySelector()))
-// Adds below
-        .intervalJoin(netflows.keyBy(new DestKeySelector()))
+        .intervalJoin(netflows.keyBy(new SourceKeySelector()))
         .between(Time.milliseconds(0), Time.milliseconds((long) (queryWindow * 1000)))
         .process(new EdgeJoiner(queryWindow));
 
     // If specified, we spit out the triads we found to disk.
-    if (outputTriadFile != null) {
-      triads.writeAsText(outputTriadFile, FileSystem.WriteMode.OVERWRITE);
+    if (outputFile != null) {
+      triads.writeAsText(outputFile, FileSystem.WriteMode.OVERWRITE);
     }
-
-    // Transforms the stream of triads into triangles.
-    DataStream<Triangle> triangles = triads
-        .keyBy(new TriadKeySelector())
-        .intervalJoin(netflows.keyBy(new LastEdgeKeySelector()))
-        .between(Time.milliseconds(0), Time.milliseconds((long) (queryWindow * 1000)))
-        .process(new TriadJoiner(queryWindow));
-
-    // Write the triangles we found to disk.
-    triangles.writeAsText(outputFile, FileSystem.WriteMode.OVERWRITE);
+    System.out.println("Blah");
     env.execute();
   }
 
